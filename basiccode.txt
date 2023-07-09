@@ -1,0 +1,43 @@
+const express = require('express')
+const app = express()
+
+app.use(express.static('public'))
+
+app.set('view engine', 'ejs')
+
+
+const usersList = [
+    {'id':0, age:25},
+    {'id':1, age:27},
+    {'id':2, age:22}
+]
+
+app.get('/',(req,res) =>{
+    res.render("index", {text:"Hello from json"})
+})
+
+app.get('/users',(req,res) =>{
+    res.json(usersList)
+})
+
+
+
+
+// app.get('/search',(req,res) =>{
+//     var q = 
+//     console.log
+// })
+
+
+app.get('/users/:id',(req,res) =>{
+    var id = req.params.id
+    // res.json(usersList[id])
+    res.send(id)
+})
+
+
+
+var port = 5000
+app.listen(process.env.PORT || port, ()=>{
+    console.log(`Server Started at ${port}`)
+})
